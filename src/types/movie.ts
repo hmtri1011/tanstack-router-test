@@ -8,6 +8,12 @@ export enum Genre {
   SCIENCE_FICTION = 'SCIENCE_FICTION'
 }
 
+export interface MovieFilterParams {
+  search?: string
+  releaseYear?: [number, number]
+  genre?: Genre[]
+}
+
 export interface Movie {
   id: string
   title: string
