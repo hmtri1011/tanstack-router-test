@@ -41,12 +41,13 @@ const Slider = React.forwardRef(
           <SliderPrimitive.Range className='absolute h-full bg-primary' />
         </SliderPrimitive.Track>
         {localValues.map((value, index) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           <React.Fragment key={index}>
             <div
               className='absolute text-center'
               style={{
                 left: `calc(${((value - min) / (max - min)) * 95}% + 0px)`,
-                top: `10px`
+                top: '10px'
               }}
             >
               <span className='text-sm'>{formatLabel ? formatLabel(value) : value}</span>

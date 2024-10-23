@@ -4,8 +4,6 @@ import { MultiSelect } from '@/components/ui/multi-select'
 import { useFilterStore } from '@/store/filter'
 import { Genre } from '@/types/movie'
 
-export interface GenresFilterProps {}
-
 export const genreOptions = [
   Genre.ACTION,
   Genre.COMEDY,

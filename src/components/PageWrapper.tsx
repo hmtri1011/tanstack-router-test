@@ -6,7 +6,7 @@ export interface PageWrapperProps {
 
 export const PageWrapper = ({ children }: PageWrapperProps) => {
   return (
-    <div className='flex flex-col min-h-screen' style={{ backgroundImage: `url(/bg.svg)` }}>
+    <div className='flex flex-col min-h-screen' style={{ backgroundImage: 'url(/bg.svg)' }}>
       <Header />
       <div className='py-10'>{children}</div>
     </div>
