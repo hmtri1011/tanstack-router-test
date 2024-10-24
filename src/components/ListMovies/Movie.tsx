@@ -16,8 +16,6 @@ const GenreList = ({ genres }: { genres: Genre[] }) => {
 }
 
 export const Movie = ({ title, poster, releaseYear, description, genre }: MovieProps) => {
-  console.log('ahho', genre)
-
   return (
     <div className='p-4 rounded-md bg-bg-card'>
       <div className='relative'>
