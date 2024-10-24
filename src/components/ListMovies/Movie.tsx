@@ -17,7 +17,7 @@ const GenreList = ({ genres }: { genres: Genre[] }) => {
 
 export const Movie = ({ title, poster, releaseYear, description, genre }: MovieProps) => {
   return (
-    <div className='p-4 rounded-md bg-bg-card'>
+    <div className='p-4 rounded-[0.25rem] bg-bg-card shadow-sm'>
       <div className='relative'>
         <div className='absolute top-2 left-2'>
           <GenreList genres={genre} />
