@@ -5,7 +5,7 @@ import { ListMovies } from '@/components/ListMovies'
 function App() {
   return (
     <PageWrapper>
-      <main className='container grid grid-cols-12 sm:gap-x-8 gap-y-4 mx-auto px-4 sm:px-0'>
+      <main className='container grid grid-cols-12 sm:gap-x-8 gap-y-4 mx-auto'>
         <div className='col-span-12 md:col-span-3'>
           <Filter />
         </div>

@@ -1,3 +1,5 @@
+import { useNavigate } from '@tanstack/react-router'
+
 import { Badge } from '../ui/badge'
 import type { Genre, Movie as MovieType } from '@/types/movie'
 
@@ -15,9 +17,32 @@ const GenreList = ({ genres }: { genres: Genre[] }) => {
   )
 }
 
-export const Movie = ({ title, poster, releaseYear, description, genre }: MovieProps) => {
+export const Movie = ({ id, title, poster, releaseYear, description, genre }: MovieProps) => {
+  const navigate = useNavigate()
+
+  const handleNavigate = () => {
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    if (!(document as any).startViewTransition) {
+      navigate({
+        to: '/movies/$movieId',
+        params: { movieId: id }
+      })
+
+      return
+    }
+
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    ;(document as any).startViewTransition(() => {
+      navigate({
+        to: '/movies/$movieId',
+        params: { movieId: id }
+      })
+    })
+  }
+
   return (
-    <div className='p-4 rounded-[0.25rem] bg-bg-card shadow-sm'>
+    // <Link to={'/movies/$movieId'} params={{ movieId: id }}>
+    <div className='p-4 rounded-[0.25rem] bg-bg-card shadow-sm cursor-pointer' onClick={handleNavigate}>
       <div className='relative'>
         <div className='absolute top-2 left-2'>
           <GenreList genres={genre} />
@@ -30,5 +55,6 @@ export const Movie = ({ title, poster, releaseYear, description, genre }: MovieP
         <p className='mt-3 text-sm line-clamp-3'>{description}</p>
       </div>
     </div>
+    // </Link>
   )
 }

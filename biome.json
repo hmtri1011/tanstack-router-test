@@ -9,7 +9,8 @@
     "rules": {
       "recommended": true,
       "correctness": { "noUnusedVariables": { "level": "warn", "fix": "none" } },
-      "suspicious": { "noArrayIndexKey": { "level": "warn" } }
+      "suspicious": { "noArrayIndexKey": { "level": "warn" } },
+      "a11y": { "useKeyWithClickEvents": { "level": "off" } }
     },
     "ignore": ["dist"]
   },
