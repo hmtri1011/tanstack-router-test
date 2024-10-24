@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import queryString from 'query-string'
 
 import type { Movie, MovieFilterParams } from '@/types/movie'
+import { ENDPOINT_URL } from '@/utils/config'
 
 export const getMoviesQueryKey = (params?: MovieFilterParams) => ['@tymex/movies', params]
 export const useMovies = (params?: MovieFilterParams) => {
@@ -33,7 +34,7 @@ export const useMovies = (params?: MovieFilterParams) => {
         qs = qs ? `${qs}&${releaseYearQs}` : releaseYearQs
       }
 
-      const response = await fetch(`http://localhost:3001/api/v1/movies?${qs}`)
+      const response = await fetch(`${ENDPOINT_URL}/movies?${qs}`)
 
       const data = await response.json()
 

@@ -8,7 +8,8 @@
     "enabled": true,
     "rules": {
       "recommended": true,
-      "correctness": { "noUnusedVariables": { "level": "warn", "fix": "none" } }
+      "correctness": { "noUnusedVariables": { "level": "warn", "fix": "none" } },
+      "suspicious": { "noArrayIndexKey": { "level": "warn" } }
     },
     "ignore": ["dist"]
   },
