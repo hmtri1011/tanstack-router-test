@@ -42,13 +42,22 @@ export const Movie = ({ id, title, poster, releaseYear, description, genre }: Mo
 
   return (
     // <Link to={'/movies/$movieId'} params={{ movieId: id }}>
-    <div className='p-4 rounded-[0.25rem] bg-bg-card shadow-sm cursor-pointer' onClick={handleNavigate}>
+    <div
+      className='p-4 rounded-[0.25rem] bg-bg-card shadow-sm cursor-pointer'
+      onClick={handleNavigate}
+      data-testid='movie-item'
+    >
       <div className='relative'>
         <div className='absolute top-2 left-2'>
           <GenreList genres={genre} />
         </div>
         <img alt={title} src={poster} className='w-full h-52 rounded-md' />
-        <p className='absolute bottom-0 left-0 px-2 py-1 w-full bg-black/60 text-white rounded-md'>{title}</p>
+        <p
+          className='absolute bottom-0 left-0 px-2 py-1 w-full bg-black/60 text-white rounded-md'
+          data-testid='movie-title'
+        >
+          {title}
+        </p>
       </div>
       <div className='mt-1'>
         <p className='font-bold text-muted-foreground'>{releaseYear}</p>

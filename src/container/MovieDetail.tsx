@@ -19,7 +19,7 @@ export const MovieDetail = () => {
         }}
       >
         <Link to={'/'}>
-          <div className='flex items-center gap-x-4'>
+          <div className='flex items-center gap-x-4' data-testid='back-button'>
             <CircleArrowLeft className='w-10 h-10' />
 
             <h1 className='text-2xl font-bold'>{movie.title}</h1>

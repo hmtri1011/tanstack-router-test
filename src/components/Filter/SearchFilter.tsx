@@ -14,5 +14,12 @@ export const SearchFilter = () => {
     []
   )
 
-  return <Input className='text-white' placeholder='Quick search...' onChange={debouncedSetSearch} />
+  return (
+    <Input
+      className='text-white'
+      placeholder='Quick search...'
+      data-testid='search-input'
+      onChange={debouncedSetSearch}
+    />
+  )
 }
