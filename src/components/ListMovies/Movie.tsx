@@ -1,11 +1,29 @@
-import type { Movie as MovieType } from '@/types/movie'
+import { Badge } from '../ui/badge'
+import type { Genre, Movie as MovieType } from '@/types/movie'
 
 export interface MovieProps extends MovieType {}
 
-export const Movie = ({ title, poster, releaseYear, description }: MovieProps) => {
+const GenreList = ({ genres }: { genres: Genre[] }) => {
+  return (
+    <div className='flex flex-wrap gap-2'>
+      {genres.map(genre => (
+        <Badge key={genre} className='bg-primary/90'>
+          {genre}
+        </Badge>
+      ))}
+    </div>
+  )
+}
+
+export const Movie = ({ title, poster, releaseYear, description, genre }: MovieProps) => {
+  console.log('ahho', genre)
+
   return (
     <div className='p-4 rounded-md bg-bg-card'>
       <div className='relative'>
+        <div className='absolute top-2 left-2'>
+          <GenreList genres={genre} />
+        </div>
         <img alt={title} src={poster} className='w-full h-52 rounded-md' />
         <p className='absolute bottom-0 left-0 px-2 py-1 w-full bg-black/60 text-white rounded-md'>{title}</p>
       </div>
