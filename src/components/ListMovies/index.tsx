@@ -1,9 +1,12 @@
+import React, { useEffect } from 'react'
 import { useShallow } from 'zustand/react/shallow'
+import { useInView } from 'react-intersection-observer'
 
 import { Movie } from './Movie'
-import { useMovies } from '@/hooks/useMovies'
-import { useFilterStore } from '@/store/filter'
 import { LoadingItem } from './LoadingItem'
+import { Loading } from '../Loading'
+import { useInfiniteMovies } from '@/hooks/useMovies'
+import { useFilterStore } from '@/store/filter'
 
 export const ListMovies = () => {
   const { search, releaseYear, genre } = useFilterStore(
@@ -14,11 +17,22 @@ export const ListMovies = () => {
     }))
   )
 
-  const { data, isLoading } = useMovies({
+  const { ref, inView } = useInView({
+    threshold: 1
+  })
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteMovies({
     search,
     releaseYear,
     genre
   })
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage()
+    }
+  }, [inView, fetchNextPage])
+
+  console.log('ahihi isFetchingNextPage', isFetchingNextPage)
 
   if (isLoading)
     return (
@@ -29,13 +43,28 @@ export const ListMovies = () => {
       </div>
     )
 
-  if (!data?.length) return <div>No movies found</div>
+  if (!data?.pages.length) return <div>No movies found</div>
 
   return (
-    <div className='grid grid-cols-2 lg:grid-cols-4 gap-4'>
-      {data.map(movie => (
-        <Movie key={movie.id} {...movie} />
-      ))}
+    <div>
+      <div className='grid grid-cols-2 lg:grid-cols-4 gap-4'>
+        {data.pages.map((pageData, i) => (
+          <React.Fragment key={i}>
+            {pageData.map(movie => (
+              <Movie key={movie.id} {...movie} />
+            ))}
+          </React.Fragment>
+        ))}
+        {isFetchingNextPage && Array.from({ length: 10 }).map((_, index) => <LoadingItem key={index} />)}
+      </div>
+
+      {hasNextPage ? (
+        <div ref={ref} className='flex justify-center mt-4'>
+          <Loading className='size-9' />
+        </div>
+      ) : (
+        <p className='mt-4 text-center text-sm text-muted-foreground'>You have reached the end of the list</p>
+      )}
     </div>
   )
 }
