@@ -1,16 +1,15 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { MovieDetail } from '@/container/MovieDetail'
+import { movieQueryOptions } from '@/queries/movieQueryOptions'
 
 export const Route = createFileRoute('/movies/$movieId')({
-  // loader: async ({ params }) => {
-  //   const movie = await fetchMovie(params.movieId)
-  //   console.log('movie', movie)
-
-  //   return movie
-  // },
+  // @ts-ignore
+  loader: ({ context: { queryClient }, params: { movieId } }) => {
+    return queryClient.ensureQueryData(movieQueryOptions(movieId))
+  },
   component: MovieDetail,
   notFoundComponent: () => {
-    return <p>Post not found</p>
+    return <p>Movie not found</p>
   }
 })
